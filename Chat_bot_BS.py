@@ -125,17 +125,31 @@ def callback_resp(call):
 # Сбор контактной информации для отправки портфолио
 @bot.message_handler(content_types=['text'])
 def get_tel(message):
-    # Условие проверки ввода имени кириллицей
-    if re.findall(r'[а-яёА-яЁ]', message.text):
-        bot.send_message(message.from_user.id, text='{name}, приятно познакомиться!'.format(name=message.text))
-        bot.send_message(message.chat.id, 'Ваш номер телефона (например: +7ХХХХХХХХХХ)')
+    # # Условие проверки ввода имени кириллицей
+    # if re.findall(r'[а-яёА-яЁ]', message.text):
+    #     bot.send_message(message.from_user.id, text='{name}, приятно познакомиться!'.format(name=message.text))
+    #     bot.send_message(message.chat.id, 'Ваш номер телефона (например: +7ХХХХХХХХХХ)')
+    # # Условие проверки ввода номера телефона
+    # elif re.findall(r'\S{1,2}\S?\d{3}\S?\d{7}', message.text):
+    #     bot.send_message(message.chat.id, 'Теперь Ваш электронный адрес')
+    # # Условие проверки ввода электронной почты
+    # elif re.findall(r'([a-zA-Z0-9_.-])@([a-zA-Z0-9_.-]).([a-zA-Z])', message.text):
+    #     bot.send_message(message.chat.id, 'Благодарим за уделенное время!')
+    #     bot.send_message(message.chat.id, 'В ближайшее время направим Вам портфолио на указанный эл.адрес')
+    # else:
+    #     bot.send_message(message.chat.id, 'Попробуйте еще раз')
+
+    # Условие проверки ввода электронной почты
+    if re.findall(r'([a-zA-Z0-9_.-])@([a-zA-Z0-9_.-]).([a-zA-Z])', message.text):
+        bot.send_message(message.chat.id, 'Благодарим за уделенное время!')
+        bot.send_message(message.chat.id, 'В ближайшее время направим Вам портфолио на указанный эл.адрес')
     # Условие проверки ввода номера телефона
     elif re.findall(r'\S{1,2}\S?\d{3}\S?\d{7}', message.text):
         bot.send_message(message.chat.id, 'Теперь Ваш электронный адрес')
-    # Условие проверки ввода электронной почты
-    elif re.findall(r'([a-zA-Z0-9_.-])@([a-zA-Z0-9_.-]).([a-zA-Z])', message.text):
-        bot.send_message(message.chat.id, 'Благодарим за уделенное время!')
-        bot.send_message(message.chat.id, 'В ближайшее время направим Вам портфолио на указанный эл.адрес')
+    # Условие проверки ввода имени кириллицей
+    elif re.findall(r'[а-яёА-яЁa-zA-Z]', message.text):
+        bot.send_message(message.from_user.id, text='{name}, приятно познакомиться!'.format(name=message.text))
+        bot.send_message(message.chat.id, 'Ваш номер телефона (например: +7ХХХХХХХХХХ)')
     else:
         bot.send_message(message.chat.id, 'Попробуйте еще раз')
 
